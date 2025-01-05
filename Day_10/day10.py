@@ -47,11 +47,7 @@ def dfs_part1(path: list[int], m: [list[list[int]]], r: int, c: int):
 
             if m[r+y][c+x][1] == True and m[r+y][c+x][0] == m[r][c][0] + 1:
                 path.append(m[r+y][c+x][0])
-                r = r+y
-                c = c+x
-                dfs_part1(path, m, r, c)
-                r = r-y
-                c = c-x
+                dfs_part1(path, m, r + y, c + x)
 
         except IndexError:
             pass
@@ -76,11 +72,7 @@ def dfs_part2(path: list[int], m: [list[list[int]]], r: int, c: int):
 
             if m[r+y][c+x] == m[r][c] + 1:
                 path.append(m[r+y][c+x])
-                r = r+y
-                c = c+x
-                dfs_part2(path, m, r, c)
-                r = r-y
-                c = c-x
+                dfs_part2(path, m, r+y, c+x)
 
         except IndexError:
             pass

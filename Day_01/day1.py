@@ -8,7 +8,8 @@ def part2(filename: str) -> int:
 
     columns = get_input(filename)
 
-    def create_dict(l: list) -> dict :
+    def create_dict(l: list) -> dict:
+        '''Create a dictionary using the integers that appear in the list as keys and the number of times they appear as values'''
         d: dict[int, int] = {}
         for v in l:
             n = d.get(v,0)
