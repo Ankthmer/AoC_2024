@@ -16,10 +16,10 @@ def part2(filename: str) -> int:
             counter += 1
         else:
             for j, el in enumerate(rep):
-                #Suppress one of your elements
+                #Suppress one of your elements.
                 t = [rep[i] for i in range(0,len(rep)) if i != j]
 
-                #If one of the combinations works the report is safe and you don't need to check the others
+                #If one of the combinations works the report is safe and you don't need to check the others.
                 if check(t) == True:
                     counter += 1
                     break
@@ -33,7 +33,7 @@ def get_input(filename: str) -> list[list[int]]:
     return lines
 
 def check(rep: list[int]) -> bool:
-    '''If the numbers in the report are all increasing (or all decreasing) not too fast the report is safe'''
+    '''If the numbers in the report are all increasing (or all decreasing) not too fast the report is safe.'''
     if (all(rep[i+1]-rep[i] in range(1,4) for i in range (0,len(rep)-1)) or
         all(rep[i]-rep[i+1] in range(1,4) for i in range (0,len(rep)-1))
         ):

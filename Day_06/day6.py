@@ -2,8 +2,10 @@ def part1(filename: str) -> int:
     with open(filename) as f:
         m = [[i for i in line.strip()] for line in f]
 
+    #Find the position where the guard starts his path.
     r, c = get_pos(m, '^')
 
+    #Count how many position the guard visited along his route.
     return count_pos(m, r, c, '#')
 
 
@@ -21,6 +23,7 @@ def part2(filename: str) -> int:
 
     for i, row in enumerate(mod):
         for j, char in enumerate(row):
+            #If this position is empty, try adding an obstruction and see if this change creates a loop.
             if char == 'X' and (i != r or j != c):
                 cop = [line.copy() for line in m]
                 cop[i][j] = '#'
@@ -30,7 +33,7 @@ def part2(filename: str) -> int:
     return counter
 
 def get_pos(m: list[list[str]], s: str) -> (int, int):
-    '''Return row and column indexes of the first occurence of a specific substring'''
+    '''Return row and column indexes of the first occurence of a specific substring.'''
     for i, line in enumerate(m):
         if m[i].count(s)>0:
             r = i
@@ -39,7 +42,7 @@ def get_pos(m: list[list[str]], s: str) -> (int, int):
     return (r, c)
 
 def count_pos(m: list[list[str]], r: int, c: int, s: str):
-    '''Count how many positions the guard will visit, if there is a cycle return 0'''
+    '''Count how many positions the guard will visit, if there is a loop return 0.'''
     x = 0
     y = -1
     end = False
@@ -49,13 +52,13 @@ def count_pos(m: list[list[str]], r: int, c: int, s: str):
     arrivals = []
 
 
-    #If the guard is not at the border of the map
+    #If the guard is not at the border of the map.
     if r+y in range(0, len(m)) and c+x in range(0, len(m[0])):
 
-        #While the guard is still on the map
+        #While the guard is still on the map.
         while end == False:
             try:
-                #The guard goes forward until the guard founds a marker
+                #The guard goes forward until the guard founds a marker.
                 while (m[r+y][c+x] != s):
                     if r+y < 0 or c+x < 0:
                         raise IndexError
@@ -66,10 +69,12 @@ def count_pos(m: list[list[str]], r: int, c: int, s: str):
                     r += y
                     c += x
 
+                #If the guard has visited this position at least two times this is a loop.
                 if arrivals.count((r,c)) > 1:
                     return 0
+
                 arrivals.append((r,c))
-                #Then the guard turns right
+                #Then the guard turns right.
                 if (x,y) == (0,-1):
                     (x,y) = (1,0)
                 elif (x,y) == (1,0):

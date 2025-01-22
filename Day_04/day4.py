@@ -2,18 +2,18 @@ def part1(puzzle_filename: str) -> int:
 
     counter = 0
 
-    #Read the file and produce a list of str
+    #Read the file and produce a list of str.
     with open(puzzle_filename) as f:
         lines = [line for line in f]
 
-    #Find the total number of occurrences
+    #Find the total number of occurrences.
     for x, row in enumerate(lines):
         for y, char in enumerate(row):
 
-            #Search the Xs in your matrix
+            #Search the Xs in your matrix.
             if char == 'X':
 
-                #Search XMAS in every direction
+                #Search XMAS in every direction.
                 for dx, dy in [(dx,dy)
                                for dx in range(-1,2)
                                for dy in range(-1,2)
@@ -34,22 +34,22 @@ def part2(puzzle_filename: str) -> int:
     counter = 0
     mas = set('MS')
 
-    #Read the file and produce a list of str
+    #Read the file and produce a list of str.
     with open(puzzle_filename) as f:
         lines = [line for line in f]
 
-    #Find the total number of occurrences
+    #Find the total number of occurrences.
     for x, row in enumerate(lines):
         for y, char in enumerate(row):
 
-            #Search the As in your matrix
+            #Search the As in your matrix.
             if char == 'A':
 
                 try:
                     if (x-1 > -1 and y-1 > -1
-                        #Check the first diagonal
+                        #Check the first diagonal.
                         and {lines[x-1][y-1], lines [x+1][y+1]} == mas
-                        #Check the second diagonal
+                        #Check the second diagonal.
                         and {lines[x-1][y+1], lines [x+1][y-1]} == mas
                         ) :
                         counter += 1
